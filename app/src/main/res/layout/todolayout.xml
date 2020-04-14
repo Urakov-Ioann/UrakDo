@@ -17,13 +17,35 @@
         android:gravity="center"
         android:layout_height="wrap_content">
     </EditText>
-    <ListView
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="  Задачи:">
+    </TextView>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
         android:divider="#ffffff"
         android:dividerHeight="0.5dp"
         android:id="@+id/todolist">
-    </ListView>
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="  Выполненные задачи:">
+    </TextView>
+
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:divider="#ffffff"
+        android:dividerHeight="0.5dp"
+        android:id="@+id/tododone">
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
 
 </LinearLayout>
