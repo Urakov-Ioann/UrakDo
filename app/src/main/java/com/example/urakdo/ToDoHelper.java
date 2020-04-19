@@ -2,6 +2,7 @@ package com.example.urakdo;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,9 +33,14 @@ public class ToDoHelper extends AppCompatActivity {
     ArrayList<String> listData;
     ArrayList<String> doneList;
     final Context context = this;
+    public static int theme;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(theme == 1){
+            setTheme(R.style.darktheme);
+        }
+        else setTheme(R.style.AppTheme);
         setContentView(R.layout.todolayout);
         listview = (SwipeMenuListView) findViewById(R.id.todolist);
         list = (SwipeMenuListView) findViewById(R.id.tododone);
@@ -105,8 +111,6 @@ public class ToDoHelper extends AppCompatActivity {
                         AlertDialog alertDialog = mDialogBuilder.create();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorPrimary)));
-                            alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.White));
-                            alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.White));
                         }
                         alertDialog.show();
                         break;
@@ -153,9 +157,7 @@ public class ToDoHelper extends AppCompatActivity {
                                         });
                         AlertDialog alertDialog = mDialogBuilder.create();
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorPrimary)));
-                            alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(getColor(R.color.White));
-                            alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setTextColor(getColor(R.color.White));
+                            alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(getColor(R.color.colorG)));
                         }
                         alertDialog.show();
                         break;
@@ -199,9 +201,19 @@ public class ToDoHelper extends AppCompatActivity {
             else
             doneList.add( data.getString(1) );
         }
-        ListAdapter adapter = new ArrayAdapter<>(this, R.layout.todolist, listData);
+        ListAdapter adapter = new ArrayAdapter<>(this, R.layout.goaltodo, listData);
         listview.setAdapter(adapter);
         adapter = new ArrayAdapter<>(this, R.layout.donelist, doneList);
         list.setAdapter(adapter);
+        if (listData.size() == 0 && doneList.size() > listData.size()){
+            String name = ForNewDB.DB_name;
+            MainActivity.rep(name);
+        }
+    }
+
+    public void onBackPressed(){
+        super.onBackPressed();
+        Intent intent = new Intent(ToDoHelper.this, MainActivity.class);
+        startActivity(intent);
     }
 }

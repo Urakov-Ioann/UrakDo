@@ -9,16 +9,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     private  static final String COL2 = "todo";
+    private  static final String COL3 = "checked";
     public static final String DB_name="goals";
     public DataBaseHelper(Context context) {
 
-        super(context, DB_name, null, 2);
+        super(context, DB_name, null, 4);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + DB_name + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COL2 + " TEXT)";
+                COL2 + " TEXT," +
+                COL3 + " TEXT)";
         db.execSQL(createTable);
     }
     @Override
@@ -36,11 +38,18 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, name);
+        contentValues.put(COL3, 0);
         db.insert(DB_name, null, contentValues);
 
     }
     public void Delete(String name){
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(DB_name, COL2+" = "+name, null);
+    }
+    public void replace (String name, String value){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL3, value);
+        db.update(DB_name, contentValues, "todo = " + name, null);
     }
 }

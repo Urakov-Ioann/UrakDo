@@ -5,8 +5,7 @@
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
     android:gravity="center_vertical"
 
-    android:background="@color/colorPrimary"
-    android:checkMarkTint="@color/White"
+    android:checkMarkTint="?attr/textcolor"
     android:checkMark="?android:attr/listChoiceIndicatorMultiple"
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" />
